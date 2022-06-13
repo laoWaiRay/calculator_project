@@ -1,3 +1,6 @@
+$color-primary: #2d2d2d;
+$color-secondary: #383838;
+
 *,
 *::after,
 *::before{
@@ -8,12 +11,127 @@
 
 html{
     font-size: 62.5%;
+
 }
 
 body{
     font-size: 1.6rem;
     min-height: 100vh;
-    background-color: rgb(17, 17, 17);
-    color: rgb(88, 0, 0);
+    background-color: rgb(24, 24, 24);
+    color: #000;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+
+button{
+    &:hover{
+        cursor: pointer;
+        filter: brightness(70%);
+    }
+    &:active{
+        transform: translateY(1px);
+        filter: brightness(60%);
+    }
+}
+
+.title{
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 5rem;
+    color: rgba(240, 255, 255, 0.766);
+    font-weight: 100;
+    letter-spacing: 1px;
+
+    &:hover{
+        filter: brightness(70%);
+    }
+}
+
+.calc{
+    background-color: $color-primary;
+    width: 60rem;
+    font-size: 2rem;
+    padding: 5rem 3rem;
+    user-select: none;
+    border-radius: 3px;
+}
+
+.calc>*>*,
+.calc>*>*>*{
+    border-radius: 3px;
+}
+
+.calc-display-outer{
+    margin-bottom: 3rem;
+}
+
+.calc-display-inner{
+    background-color: $color-secondary;
+    padding: 1rem 2rem;
+    font-size: 5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    &:hover{
+        filter: brightness(70%);
+    }
+}
+
+.calc-input{
+    font-size: 4rem;
+    display: flex;
+    padding: 2rem 0;
+    height: 30rem;
+    &__nums{
+        width: 50%;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: .5rem;
+    }
+
+    &__num{
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-secondary;
+        font-size: inherit;
+    }
+
+    &__operators{
+        margin-left: 2rem;
+        width: 50%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(4,1fr);
+        gap: .5rem;
+    }
+
+    &__operator{
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-secondary;
+        font-size: inherit;
+    }
+}
+
+.btn-clear{
+    grid-column: 1/-1;
+    &:hover{
+        color: rgb(173, 16, 16);
+    }
+}
+
+.btn-equals{
+    grid-column: 1/-1;
+}
+
+.btn-0{
+    grid-column: 1/span 3;
+    grid-row: 4/span 1;
+}
+
