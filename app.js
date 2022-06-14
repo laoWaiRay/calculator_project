@@ -49,8 +49,8 @@ const isActiveOperator = function(operator){
 }
 
 const checkDisplayOutputLength = () => {
-    if (total.toString().length > 16){
-        display.textContent = total.toFixed(14);
+    if (total.toPrecision().length > 16){
+        display.textContent = total.toString().slice(0,15);
         return true;
     }
 }
@@ -157,37 +157,53 @@ btnEquals.addEventListener('click', ()=>{
    switch(true){
     case activeOperation.every(obj => obj.active === false):
             total = parseFloat(display.textContent);
-            checkDisplayOutputLength();
-            if(checkDisplayOutputLength() === true) break;
-            display.textContent = total;
+            if(checkDisplayOutputLength() === true) {
+                checkDisplayOutputLength();
+            } else {
+                display.textContent = total;
+            }
             break;
     case activeOperation.find(obj => obj.name === 'add').active:
         total = operate(add, total, parseFloat(storage));
         checkDisplayOutputLength();
-        if(checkDisplayOutputLength() === true) break;
-        display.textContent = total;
+        if(checkDisplayOutputLength() === true) {
+            checkDisplayOutputLength();
+        } else {
+            display.textContent = total;
+        }
         break;
+        
     case activeOperation.find(obj => obj.name === 'subtract').active:
         total = operate(subtract, total, parseFloat(storage));
         checkDisplayOutputLength();
-        if(checkDisplayOutputLength() === true) break;
-        display.textContent = total;
+        if(checkDisplayOutputLength() === true) {
+            checkDisplayOutputLength();
+        } else {
+            display.textContent = total;
+        }
         break;
+        
     case activeOperation.find(obj => obj.name === 'multiply').active:
         total = operate(multiply, total, parseFloat(storage));
         checkDisplayOutputLength();
-        if(checkDisplayOutputLength() === true) break;
-        display.textContent = total;
+        if(checkDisplayOutputLength() === true) {
+            checkDisplayOutputLength();
+        } else {
+            display.textContent = total;
+        }
         break;
+        
     case activeOperation.find(obj => obj.name === 'divide').active:
         if(storage === '0'){
             display.textContent = 'Cannot divide by 0';
             break;
         }
         total = operate(divide, total, parseFloat(storage));
-        checkDisplayOutputLength();
-        if(checkDisplayOutputLength() === true) break;
-        display.textContent = total;
+        if(checkDisplayOutputLength() === true) {
+            checkDisplayOutputLength();
+        } else {
+            display.textContent = total;
+        }
         break;
    }
    equalsActive = true;
