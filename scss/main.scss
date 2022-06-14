@@ -1,6 +1,7 @@
+// @import "../scss/fontawesome.scss";
+// @import "../scss/solid.scss";
 $color-primary: #2d2d2d;
 $color-secondary: #383838;
-
 *,
 *::after,
 *::before{
@@ -125,7 +126,7 @@ button{
 }
 
 .btn-clear{
-    grid-column: 1/-1;
+    grid-column: 1/-2;
     &:hover{
         color: rgb(173, 16, 16);
     }
@@ -136,7 +137,7 @@ button{
 }
 
 .btn-0{
-    grid-column: 1/span 3;
+    grid-column: 2/span 2;
     grid-row: 4/span 1;
 }
 
@@ -154,4 +155,16 @@ button{
     }
 }
 
-
+@media only screen and (max-width: 516px){
+    html{
+        font-size: 45%;
+    }
+    body{
+        padding: 0;
+    }
+    .calc{
+        width: 100vw;
+        padding: 4rem 1.5rem;
+        height: 60vh;
+    }
+}
