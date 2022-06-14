@@ -45,13 +45,20 @@ const setActiveOperation = (operation) => {
 
 numInputs.forEach(num => {
     num.addEventListener('click', (e) => {
-            if(storage === '0'){
-                storage = e.target.textContent;
-                display.textContent = storage;
-            } else{
-                storage += e.target.textContent;
-                display.textContent = storage;
-            }
+        if(equalsActive){
+            total = 0;
+            storage = '0';
+            display.textContent = storage;
+            activeOperation.forEach(obj => obj.active = false);
+            equalsActive = false;
+        }
+        if(storage === '0'){
+            storage = e.target.textContent;
+            display.textContent = storage;
+        } else{
+            storage += e.target.textContent;
+            display.textContent = storage;
+        }
         console.log(storage)
     })
 })
@@ -60,6 +67,8 @@ btnClear.addEventListener('click', () => {
     total = 0;
     storage = '0';
     display.textContent = storage;
+    activeOperation.forEach(obj => obj.active = false);
+    equalsActive = false;
 })
 
 // btnAdd.addEventListener('click', ()=>{
@@ -88,12 +97,21 @@ btnClear.addEventListener('click', () => {
 
 btnAdd.addEventListener('click', ()=>{
     if(!activeOperation.find(obj => obj.name === 'add').active){
-        if(activeOperation.find(obj => obj.name === 'subtract').active){
+        if(equalsActive === true){
+            total = total;
+            display.textContent = total;
+        } else if(activeOperation.find(obj => obj.name === 'subtract').active){
             total = operate(subtract, total, parseInt(storage));
+            display.textContent = total;
         } else if (activeOperation.find(obj => obj.name === 'multiply').active){
             total = operate(multiply, total, parseInt(storage));
+            display.textContent = total;
+        } else if (activeOperation.find(obj => obj.name === 'divide').active){
+            total = operate(divide, total, parseInt(storage));
+            display.textContent = total;
         } else {
             total = operate(add, total, parseInt(storage));
+            display.textContent = total;
         }
         storage = '0';
         setActiveOperation('add');
@@ -101,6 +119,7 @@ btnAdd.addEventListener('click', ()=>{
         if(!equalsActive){
             total = operate(add, total, parseInt(storage));
             storage = '0';
+            display.textContent = total;
         }
     }
     equalsActive = false;
@@ -108,15 +127,27 @@ btnAdd.addEventListener('click', ()=>{
 
 btnSubtract.addEventListener('click', ()=>{
     if(!activeOperation.find(obj => obj.name === 'subtract').active){
-        if(activeOperation.find(obj => obj.name === 'add').active){
+        if(equalsActive === true){
+            total = total;
+            display.textContent = total;
+        } else if(activeOperation.find(obj => obj.name === 'add').active){
             total = operate(add, total, parseInt(storage));
+            display.textContent = total;
         } else if (activeOperation.find(obj => obj.name === 'multiply').active){
             total = operate(multiply, total, parseInt(storage));
+            display.textContent = total;
+        } else if (activeOperation.find(obj => obj.name === 'divide').active){
+            total = operate(divide, total, parseInt(storage));
+            display.textContent = total;
+        } else {
+            total = parseInt(display.textContent);
+            display.textContent = total;
         }
         storage = '0';
         setActiveOperation('subtract');
     } else {
         total = operate(subtract, total, parseInt(storage));
+        display.textContent = total;
         storage = '0';
     }
     equalsActive = false;
@@ -125,16 +156,28 @@ btnSubtract.addEventListener('click', ()=>{
 
 btnMultiply.addEventListener('click', ()=>{
     if(!activeOperation.find(obj => obj.name === 'multiply').active){
-        if(activeOperation.find(obj => obj.name === 'add').active){
+        if(equalsActive === true){
+            total = total;
+            display.textContent = total;
+        } else if(activeOperation.find(obj => obj.name === 'add').active){
             total = operate(add, total, parseInt(storage));
+            display.textContent = total;
         } else if (activeOperation.find(obj => obj.name === 'subtract').active){
             total = operate(subtract, total, parseInt(storage));
+            display.textContent = total;
+        } else if (activeOperation.find(obj => obj.name === 'divide').active){
+            total = operate(divide, total, parseInt(storage));
+            display.textContent = total;
+        } else {
+            total = parseInt(display.textContent);
+            display.textContent = total;
         }
         storage = '0';
         setActiveOperation('multiply');
     } else {
         if(equalsActive === false){
-            total = operate(multiply, total, parseInt(storage));
+            total = parseInt(display.textContent);
+            display.textContent = total;
         }
         storage = '0';
     }
@@ -143,7 +186,32 @@ btnMultiply.addEventListener('click', ()=>{
 
 
 btnDivide.addEventListener('click', ()=>{
-    setActiveOperation('divide');
+    if(!activeOperation.find(obj => obj.name === 'divide').active){
+        if(equalsActive === true){
+            total = total;
+            display.textContent = total;
+        } else if(activeOperation.find(obj => obj.name === 'add').active){
+            total = operate(add, total, parseInt(storage));
+            display.textContent = total;
+        } else if (activeOperation.find(obj => obj.name === 'subtract').active){
+            total = operate(subtract, total, parseInt(storage));
+            display.textContent = total;
+        } else if (activeOperation.find(obj => obj.name === 'multiply').active){
+            total = operate(multiply, total, parseInt(storage));
+            display.textContent = total;
+        }else {
+            total = parseInt(display.textContent);
+            display.textContent = total;
+        }
+        storage = '0';
+        setActiveOperation('divide');
+    } else {
+        if(equalsActive === false){
+            total = parseInt(display.textContent);
+        }
+        storage = '0';
+    }
+    equalsActive = false;
 })
 btnEquals.addEventListener('click', ()=>{
    switch(true){
@@ -160,7 +228,8 @@ btnEquals.addEventListener('click', ()=>{
         display.textContent = total;
         break;
     case activeOperation.find(obj => obj.name === 'divide').active:
-        console.log('OK, dividing');
+        total = operate(divide, total, parseInt(storage));
+        display.textContent = total;
         break;
    }
    equalsActive = true;
