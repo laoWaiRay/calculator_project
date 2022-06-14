@@ -27,6 +27,8 @@ body{
 }
 
 button{
+    color: inherit;
+    font-weight: inherit;
     &:hover{
         cursor: pointer;
         filter: brightness(70%);
@@ -41,7 +43,7 @@ button{
     padding: 1rem;
     margin-bottom: 1rem;
     font-size: 5rem;
-    color: rgba(240, 255, 255, 0.766);
+    color: azure;
     font-weight: 100;
     letter-spacing: 1px;
 
@@ -57,6 +59,7 @@ button{
     padding: 5rem 3rem;
     user-select: none;
     border-radius: 3px;
+    color: azure;
 }
 
 .calc>*>*,
