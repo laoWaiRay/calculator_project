@@ -138,4 +138,18 @@ button{
     grid-row: 4/span 1;
 }
 
+@media only screen and (max-width: 600px){
+    html{
+        font-size: 56%;
+    }
+    body{
+        padding: 0;
+    }
+    .calc{
+        width: 100vw;
+        padding: 4rem 1.5rem;
+        height: 60vh;
+    }
+}
+
 
