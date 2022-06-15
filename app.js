@@ -4,6 +4,8 @@ const multiply = (a,b) => a * b;
 const divide = (a,b) => a / b;
 const operate = (operator, a, b) => operator(a,b);
 
+let clickEvent = new Event('click');
+
 let storage = '0';
 let total = 0;
 let next = 0;
@@ -210,36 +212,36 @@ btnEquals.addEventListener('click', ()=>{
 })
 
 document.addEventListener('keydown', (e) => {
-    console.log(e.key)
+    // console.log(e)
     switch(true){
-        case e.code === 'Digit1':
+        case e.code === 'Digit1' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit2':
+        case e.code === 'Digit2' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit3':
+        case e.code === 'Digit3' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit4':
+        case e.code === 'Digit4' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit5':
+        case e.code === 'Digit5' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit6':
+        case e.code === 'Digit6' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit7':
+        case e.code === 'Digit7' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit8':
+        case e.code === 'Digit8' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit9':
+        case e.code === 'Digit9' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
-        case e.code === 'Digit0':
+        case e.code === 'Digit0' && e.shiftKey === false:
             updateDisplay(e.key);
             break;
         case e.code === 'Backspace':
@@ -252,6 +254,25 @@ document.addEventListener('keydown', (e) => {
                 return
             }
             display.textContent = storage;
+            break;
+        case e.key === '+':
+            operatorButtonAction('add');
+            break;
+        case e.key === '-':
+            operatorButtonAction('subtract');
+            break;
+        case e.key === '*':
+            operatorButtonAction('multiply');
+            break;
+        case e.key === '/':
+            operatorButtonAction('divide');
+            break;
+        case e.key === 'Enter':
+            btnEquals.dispatchEvent(clickEvent);
+            break;
+        case e.key === 'r':
+            btnClear.dispatchEvent(clickEvent);
+            break;
     }
 })
 
